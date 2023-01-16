@@ -1,0 +1,453 @@
+/*----------------1024px----------------------*/
+@media screen and (max-width: 991px) {
+    #desk-header {
+        display: none;
+    }
+
+    #mob-header {
+        display: block;
+        background: linear-gradient(rgb(255 251 251 / 50%), rgb(255 255 255 / 50%)), url(../public/assets/images/bg-shape.png);
+        background-size: cover;
+    }
+
+    #mob-header nav.navbar {
+        background-color: transparent;
+    }
+
+    #mob-header .menu-desktop {
+        display: none !important;
+    }
+
+    #mob-header .d-flex.menu-mobile .phn_menu>div {
+        padding-left: 24px;
+        list-style: none;
+    }
+
+    #mob-header .d-flex.menu-mobile .phn_menu {
+        display: flex;
+        align-items: center;
+        padding-left: 0px !important;
+        margin-bottom: 0px;
+    }
+
+    header .top-header-email img {
+        margin-right: 0px;
+    }
+
+    header .top-bar img {
+        max-width: 20px;
+    }
+
+    header .header-social span,
+    header .top-header-email a {
+        font-size: 16px;
+    }
+
+    .logo {
+        text-align: center;
+    }
+
+    .header-search-bar {
+        padding: 20px 0;
+    }
+
+    button.navbar-toggler {
+        border: none;
+    }
+
+    .navbar-toggler:focus {
+        box-shadow: none;
+    }
+
+    header .middle-bar.p-0 {
+        padding: 25px 0px !important;
+    }
+
+    img.user-login {
+        max-width: 22px;
+    }
+
+    header .header-cart img {
+        max-width: 24px;
+    }
+
+    .header-cart {
+        padding-left: 10px !important;
+    }
+
+    #mob-header section {
+        padding: 10px 0;
+    }
+
+    .offcanvas-header img {
+        max-width: 130px;
+    }
+
+    .offcanvas-body .header-social-icon ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+    }
+
+    .offcanvas-body .header-social-icon li img {
+        max-width: 35px;
+    }
+
+    .offcanvas-body .header-social-icon ul li {
+        margin-right: 10px;
+    }
+
+    span.dropdown-toggle {
+        position: absolute;
+        right: 0;
+        top: 5px;
+        font-size: 20px;
+    }
+
+    span.dropdown-toggle:after {
+        display: none;
+    }
+
+    ul.dropdown-menu.show {
+        width: 100%;
+    }
+
+    .main-slider .carousel-item {
+        height: 100%;
+    }
+
+    .scrolled {
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 20px 0px;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 999;
+        padding: 10px 0 !important;
+        background-color: #fff !important;
+    }
+
+    #mob-header .scrolled .site-logo img {
+        max-width: 150px;
+        height: 50px;
+    }
+
+    .offcanvas-header a.site-logo {
+        font-size: 30px;
+        font-weight: 800;
+        color: #fff;
+    }
+
+    div#offcanvasRight {
+        background-color: #FF8900;
+    }
+
+    .offcanvas-body {
+        padding-top: 0;
+    }
+
+    .offcanvas-body button.btn.drak-btn {
+        background-color: #fff !important;
+    }
+
+    .offcanvas-body ul.navbar-nav li a.nav-link {
+        color: #fff;
+    }
+
+    .offcanvas-body .header-social-icon h4 {
+        color: #fff;
+    }
+
+    .offcanvas-body input.form-control:focus {
+        background-color: #fff;
+    }
+
+    .main-slider .slider-content .carousel-caption {
+        left: 35%;
+    }
+
+    .main-slider .carousel-indicators [data-bs-target] {
+        width: 10px;
+        height: 10px;
+    }
+
+    .main-slider .carousel-indicators .active {
+        width: 10px !important;
+        height: 10px !important;
+    }
+
+    .carousel-caption .num-head h2 {
+        font-size: 35px;
+        line-height: 40px;
+        max-width: 280px;
+    }
+
+    .main-slider .slider-content .carousel-caption p {
+        font-size: 16px;
+    }
+
+    .school_we_stock_cont {
+        max-width: unset;
+        padding: 0px 30px;
+    }
+
+    .category_card_box_row {
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 30px;
+        padding-top: 30px;
+    }
+
+    .school-card h4 {
+        font-size: 14px;
+    }
+
+    .school-card a {
+        font-size: 10px;
+    }
+
+    .school-sec form {
+        padding: 0 0px;
+    }
+
+    .school-uniform .container {
+        padding: 0px 12px;
+    }
+
+    .nav-pills a.nav-link {
+        margin: 7px 10px;
+        font-size: 14px;
+    }
+
+    ul.nav.nav-pills {
+        justify-content: center !important;
+    }
+
+    .ad-banner-sec h2.sec-title {
+        font-size: 30px;
+        line-height: 43px;
+    }
+
+    .ad-banner-sec h2.sec-title span {
+        font-size: 48px;
+    }
+
+    div#accordion .card-header a {
+        font-size: 18px;
+    }
+
+    div#accordion .card .card-body {
+        font-size: 13px;
+    }
+
+    .ft-box p {
+        font-size: 12px;
+    }
+
+
+      .testimonial-slider.slick-initialized.slick-slider {
+        padding: 10px;
+    }
+
+    .our_partners_row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    section.our_partners .container,
+    section.testimonial-sec .container {
+        padding: 0px 12px;
+    }
+
+    .faq-sec {
+        padding: 60px 0 0;
+        background-position: center;
+    }
+    footer {
+        border-bottom: 16px solid rgb(242 242 242);
+    }
+    /*-----myacount-----*/
+    .signin_card {
+        margin-bottom: 20px;
+    }
+    .signin_register_sec {
+        padding-bottom: 60px;
+    }
+    .max-container {
+        padding: 0px 20px;
+    }
+
+    .signin_card, .register_card {
+        padding: 24px;
+        max-width: unset;
+    }
+
+}
+
+@media screen and (min-width: 992px) {
+    #desk-header {
+        display: block;
+    }
+
+    #mob-header {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    header a.nav-link {
+        font-size: 14px;
+    }
+
+    header span.dropdown-toggle img {
+        max-width: 14px;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .main-slider .carousel-item>img {
+        height: 450px;
+        object-fit: cover;
+    }
+
+    .main-slider .carousel-item {
+        height: 450px;
+    }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1199px) {
+    header .header-login a {
+        font-size: 14px;
+    }
+
+    .header-login {
+        padding-right: 8px;
+    }
+
+    header .header-login img {
+        max-width: 22px;
+    }
+
+    header .header-cart img {
+        max-width: 22px;
+    }
+
+    .header-mob a {
+        font-size: 12px;
+    }
+
+    header .nav-item {
+        padding-right: 30px;
+    }
+
+    .main-slider .carousel-item {
+        height: 580px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+
+    .main-slider .carousel-item img {
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .main-slider .slider-content .carousel-caption h2 {
+        font-size: 40px;
+        line-height: 50px;
+    }
+
+    .main-slider .carousel-item {
+        height: 500px;
+    }
+
+    .main-slider .slider-content .carousel-caption {
+        padding: 0 20px;
+    }
+
+    .main-slider .slider-content .carousel-caption p {
+        font-size: 15px;
+    }
+
+    .main-slider .slider-content .carousel-caption h2 {
+        font-size: 30px;
+        line-height: 35px;
+        max-width: 240px;
+    }
+
+    .carousel-caption .num-head img {
+        width: 100%;
+        max-width: 85px;
+    }
+
+    .main-slider .slider-content .carousel-caption {
+        left: 50%;
+    }
+
+    .main-slider .slider-content .carousel-caption p {
+        font-size: 16px;
+    }
+
+    .white-btn {
+        padding: 6px 10px;
+    }
+
+    .main-slider .slider_btn button {
+        font-size: 14px;
+    }
+
+    .faq-sec .row {
+        flex-direction: column-reverse;
+    }
+
+
+}
+
+@media screen and (max-width: 409px) {
+
+    header .header-social span,
+    header .top-header-email a {
+        font-size: 13px;
+    }
+
+    .ad-banner-sec h2.sec-title {
+        font-size: 45px;
+        line-height: 50px;
+    }
+}
+
+@media screen and (max-width: 920px) {
+    #mob-header .menu-desktop {
+        display: none !important;
+    }
+
+    #mob-header .menu-mobile {
+        display: block !important;
+    }
+
+    #mob-header .search-bar {
+        position: absolute;
+        left: 0;
+        bottom: -61px;
+        width: 100%;
+        visibility: hidden;
+        box-shadow: 0px 3px 8px #33333354;
+    }
+
+    #mob-header .search-bar.show_serch_form {
+        visibility: visible;
+        z-index: 9;
+    }
+
+}
+
+@media screen and (max-width: 365px) {
+    .site-logo img {
+        max-width: 100px;
+    }
+}
+
+@media screen and (min-width: 1025px) and (max-width: 1199px) {
+    header a.nav-link {
+        color: #000;
+        font-size: 15px;
+        font-weight: 600;
+    }
+}
