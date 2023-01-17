@@ -3,7 +3,7 @@ import authReducer from '../Features/auth/authSlice'
 import { authApi } from '../app/services/auth/authService'
 import { createWrapper } from "next-redux-wrapper";
 
-export default configureStore({
+const makeStore = () => configureStore({
     reducer: {
       auth: authReducer,
       [authApi.reducerPath]: authApi.reducer,
@@ -14,3 +14,4 @@ export default configureStore({
 
   
 
+export const wrapper = createWrapper(makeStore);

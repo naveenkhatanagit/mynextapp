@@ -1,8 +1,9 @@
 
 import axios from "axios";
-import {toast} from 'react-toastify';
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import 'react-toastify/dist/ReactToastify.css';
+
+
 
 
 
@@ -24,8 +25,9 @@ export const userLogin = createAsyncThunk(
         config
       )
       // store user's token in local storage
-      sessionStorage.setItem('userToken', data.access_token)
-    
+
+        // sessionStorage.setItem('userToken', data.access_token)
+        window.location.href = "/";
       return data
     } catch (error) {
       // return custom error message from API if any
@@ -53,7 +55,8 @@ export const registerUser = createAsyncThunk(
         config
       )
        // store user's token in local storage
-       sessionStorage.setItem('new_user_id', data.id)
+       SetSessionStorage(data.access_token)
+      //  sessionStorage.setItem('new_user_id', data.id)
       return data
     } catch (error) {
     // return custom error message from backend if present

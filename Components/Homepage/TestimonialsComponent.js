@@ -29,7 +29,7 @@ function TestimonialsComponent() {
     
     }, [])
 
-    console.log(testimonialList);
+   
 
     const testomonialSlider = {
         slidesToShow: 3,

@@ -1,7 +1,25 @@
 import React from 'react'
 import Link from 'next/link'
+import { useGetUserDetailsQuery } from '../../app/services/auth/authService'
+import { useEffect,useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import  { setCredentials }  from '../../Features/auth/authSlice'
+
 
 function HeaderComponent() {
+    
+    const { userInfo } = useSelector((state) => state.auth)
+    const dispatch = useDispatch()
+  
+    // automatically authenticate user if token is found
+    const { data, isFetching } = useGetUserDetailsQuery('userDetails', {
+      // pollingInterval: 900000, // 15mins
+    })
+  
+    useEffect(() => {
+      if (data) dispatch(setCredentials(data.data))
+    }, [data, dispatch])
+   
     return (
         <div>
             {/* <!-- =-=-=-=-=-=-=-=- desktop Header start =-=-=-=-=-=-=-=-=-=-=-= --> */}
@@ -12,8 +30,9 @@ function HeaderComponent() {
                         <div className="row">
                             <div className="col-lg-2 logo">
                                 <Link href="/">
-                                    LOGO
+                                 Logo
                                 </Link>
+                                
                             </div>
                             <div className="col-lg-7">
                                 <div className="header-search-bar">
@@ -30,8 +49,14 @@ function HeaderComponent() {
                                             <img src="assets/images/lang.png" alt="lang" /> ENG </a>
                                     </div>
                                     <div className="header-login">
-                                        <Link href="/login" className="d-flex">
-                                            <img src="assets/images/User.png" alt="user" /> Sign In </Link>
+                                    {isFetching
+                                    ? 'Fetching...'
+                                    : userInfo !== null
+                                    ? <Link href="/profile" className="d-flex">
+                                    <img src="assets/images/User.png" alt="user" /> {userInfo.name} </Link>
+                                    : <Link href="/login" className="d-flex">
+                                    <img src="assets/images/User.png" alt="user" /> Sign In </Link>}
+                                        
                                     </div>
                                     <div className="header-cart">
                                         <img src="assets/images/Shopping-bag.png" alt="cart" />
