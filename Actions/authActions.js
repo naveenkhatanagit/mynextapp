@@ -1,12 +1,7 @@
 
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import 'react-toastify/dist/ReactToastify.css';
-
-
-
-
-
+import { toast } from "react-toastify"
 
 const backendURL = 'https://awesmatic.vistamatrix.in/api'
 export const userLogin = createAsyncThunk(
@@ -26,8 +21,15 @@ export const userLogin = createAsyncThunk(
       )
       // store user's token in local storage
 
-        // sessionStorage.setItem('userToken', data.access_token)
-        window.location.href = "/";
+        sessionStorage.setItem('userToken', data.access_token)
+        
+        toast.success("Login Successfully", {
+          position: "top-right",
+          classNameName: "app_toast",
+          autoClose: 1000,
+        })
+        
+        
       return data
     } catch (error) {
       // return custom error message from API if any
@@ -54,9 +56,9 @@ export const registerUser = createAsyncThunk(
         { name, email,phone, password,refer_code },
         config
       )
-       // store user's token in local storage
-       SetSessionStorage(data.access_token)
-      //  sessionStorage.setItem('new_user_id', data.id)
+
+       sessionStorage.setItem('new_user_id', data.id)
+      //  window.location.href = "/login";
       return data
     } catch (error) {
     // return custom error message from backend if present

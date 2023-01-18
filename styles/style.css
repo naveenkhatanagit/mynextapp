@@ -1079,3 +1079,9 @@ input#remerber_me {
     margin: auto;
 }
 
+a.register_link{
+	color: #FF8900;
+}
+input:focus {
+box-shadow: none !important;
+}
