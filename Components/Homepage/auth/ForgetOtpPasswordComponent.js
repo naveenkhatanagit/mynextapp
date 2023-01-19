@@ -4,7 +4,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import UpdatePasswordComponent from './UpdatePasswordComponent';
 
-const TIME_DOWN = 10;
+const TIME_DOWN = 60;
 var timeOut;
 
 function ForgetOtpPasswordComponent(props) {
@@ -52,7 +52,9 @@ function ForgetOtpPasswordComponent(props) {
             method: "post",
             url: "https://awesmatic.vistamatrix.in/api/customer/resendotp",
             data: formdata,
-        }).then((res) => {
+        }).then((response) => {
+            var res = response.data;
+         
             if (res.status === true) {
                 resetTimer();
                 toastMessage({ message: res.message })
@@ -95,7 +97,7 @@ function ForgetOtpPasswordComponent(props) {
                                         <div class="mb-3">
                                             <label for="email-l" class="form-label">Enter OTP <span>*</span></label>
                                             <div class="input-group">
-                                                <img src="assets/images/email-f.svg" alt="email" />
+                                                <img src="assets/images/otp-icon.svg" alt="email" />
                                                 <input type="email" autoComplete='off' onChange={(e) => { setOtpValue(e.target.value) }} class="form-control" id="email-l" required="" />
                                             </div>
                                         </div>
@@ -119,7 +121,7 @@ function ForgetOtpPasswordComponent(props) {
                                         }
                                         <div className='text-center pt-3'>
                                             <span className='text-dark p-2 h6 '>
-                                                {timer > 0 ? `You can resend otp in  : ${timer}s` : ''}
+                                                {timer > 0 ? <>You can resend otp in  : <span className='text-success'>{timer}</span>s</> : ''}
                                             </span>
                                         </div>
 

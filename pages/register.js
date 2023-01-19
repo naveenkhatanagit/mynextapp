@@ -3,12 +3,14 @@ import Link from 'next/link'
 import { registerUser } from '../Actions/authActions'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect,useState } from 'react'
 import { toast } from "react-toastify"
 import Router from 'next/router';
+import RegisterOtpComponent from '@/Components/Homepage/auth/RegisterOtpComponent'
 
 function register() {
-
+  const [numberInputHide, setNumberInputHide] = useState(true)
+  const [otpFill, setOtpFill] = useState(false)
   const { new_user_id, userInfo, error, success } = useSelector(
     (state) => state.auth
   )
@@ -55,8 +57,9 @@ function register() {
   useEffect(() => {
     // redirect user to login page if registration was successful
     if (success) {
-
-      Router.push('/login')
+      setNumberInputHide(false);
+      setOtpFill(true)
+      
     }
     // redirect authenticated user to profile screen
     if (userInfo) Router.push('/')
@@ -72,6 +75,9 @@ function register() {
 
   return (
     <>
+    {
+                numberInputHide ?
+                    <>
       <section class="Breadcrub_sec">
         <div class="container">
           <div class="row">
@@ -138,6 +144,13 @@ function register() {
           </div>
         </div>
       </section>
+      </> : null
+            }
+
+            {
+                otpFill ? <RegisterOtpComponent userId={new_user_id}/> : null
+            }
+       
     </>
   )
 }

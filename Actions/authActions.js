@@ -57,7 +57,7 @@ export const registerUser = createAsyncThunk(
         config
       )
 
-       sessionStorage.setItem('new_user_id', data.id)
+       sessionStorage.setItem('new_user_id', data.user_id)
       //  window.location.href = "/login";
       return data
     } catch (error) {

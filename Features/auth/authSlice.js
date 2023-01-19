@@ -9,10 +9,10 @@ import { HYDRATE } from "next-redux-wrapper";
 
 // initialize userToken from local storage
 
-const setSession = (accessToken) => {
-  if (typeof window !== 'undefined')
-    localStorage.setItem('accessToken', accessToken);
-};
+// const setSession = (accessToken) => {
+//   if (typeof window !== 'undefined')
+//     localStorage.setItem('accessToken', accessToken);
+// };
 
 const getAccessToken = () => {
   if (typeof window !== 'undefined') {

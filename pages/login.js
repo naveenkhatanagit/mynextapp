@@ -36,6 +36,7 @@ function login() {
   }, [userInfo])
 
   const submitForm = (data) => {
+    console.log(data)
     dispatch(userLogin(data))
   }
 

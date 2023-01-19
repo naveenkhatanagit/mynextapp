@@ -3,6 +3,7 @@ import Link from 'next/link'
 import axios from "axios";
 import { useState } from "react";
 import toastMessage from '../../../utils/toast';
+import Router from 'next/router';
 
 function UpdatePasswordComponent(props) {
 
@@ -29,7 +30,7 @@ function UpdatePasswordComponent(props) {
                 toastMessage({
                     message: res.message,
                 })
-            window.location.href = "/login";    
+                Router.push('/login')
             } else {
                 toastMessage({ message: res.message, type: 'error' });
             }
