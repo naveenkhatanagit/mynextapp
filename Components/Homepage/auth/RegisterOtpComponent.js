@@ -41,7 +41,7 @@ function RegisterOtpComponent(props) {
           let res = response.data;
           if (response.status === 200 && res.status) {
               
-             
+            
             setSession(res.access_token)
               toastMessage({
                   message: res.message,

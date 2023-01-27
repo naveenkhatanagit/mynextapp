@@ -30,7 +30,7 @@ function HeaderComponent() {
                         <div className="row">
                             <div className="col-lg-2 logo">
                                 <Link href="/">
-                                 Logo
+                                 <img height={55}  src="assets/images/logo.png"/>
                                 </Link>
                                 
                             </div>
@@ -80,7 +80,7 @@ function HeaderComponent() {
                         <div className="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li className="nav-item active">
-                                    <a className="nav-link" aria-current="page" href="index.html">Home</a>
+                                    <Link className="nav-link" aria-current="page" href="/">Home</Link>
                                 </li>
                                 <li className="nav-item dropdown">
                                     <a className="nav-link" href="all-products.html"> All Products </a>
@@ -95,18 +95,8 @@ function HeaderComponent() {
                                         </li>
                                     </ul>
                                 </li>
-                                <li className="nav-item dropdown">
-                                    <a className="nav-link" href="all-products.html"> Schools </a>
-                                    <span className="dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false"><img
-                                        src="assets/images/menu-icon.png" /></span>
-                                    <ul className="dropdown-menu">
-                                        <li>
-                                            <a className="dropdown-item" href="#">Lorem Ipsum</a>
-                                        </li>
-                                        <li>
-                                            <a className="dropdown-item" href="#">Lorem Ipsum</a>
-                                        </li>
-                                    </ul>
+                                <li className="nav-item">
+                                    <Link className="nav-link" href="/schools-we-stock"> Schools </Link>
                                 </li>
                                 <li className="nav-item">
                                     <a className="nav-link" href="subscription.html">Bulk Orders</a>
@@ -129,7 +119,7 @@ function HeaderComponent() {
                 <section>
                     <nav className="navbar navbar-expand-lg mobile-bottom-header-bar">
                         <div className="container">
-                            <a className="navbar-brand site-logo" href="index.html">LOGO</a>
+                            <a className="navbar-brand site-logo" href="index.html"><img src="assets/images/logo.png"/></a>
                             <div className="d-flex menu-desktop">
                                 <form className="d-flex search-bar">
                                     <input className="form-control me-2" type="search" placeholder="Serach Products..." />
@@ -164,7 +154,7 @@ function HeaderComponent() {
             {/* <!-- -=-=-=-=-=-=-=-=-=-=- mobile header end =-=-=-=-=-=-=-=-=-=-=-= --> */}
             <div className="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight">
                 <div className="offcanvas-header">
-                    <a className="site-logo" href="index.html">LOGO</a>
+                    {/* <a className="site-logo" href="index.html"><img  src="assets/images/logo.png"/></a> */}
                     <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div className="offcanvas-body">

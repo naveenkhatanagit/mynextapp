@@ -18,7 +18,7 @@ function login() {
     if (error) {
       toast.error(error, {
         position: "top-right",
-        classNameName: "app_toast",
+        classNameNameName: "app_toast",
         autoClose: 1000,
       })
     }
@@ -28,7 +28,7 @@ function login() {
     if (userInfo) {
       toast.error(error, {
         position: "top-right",
-        classNameName: "app_toast",
+        classNameNameName: "app_toast",
         autoClose: 1000,
       })
       window.location.href = "/";
@@ -36,22 +36,35 @@ function login() {
   }, [userInfo])
 
   const submitForm = (data) => {
-    console.log(data)
     dispatch(userLogin(data))
   }
+  
+  const [passwordType, setPasswordType] = useState("password");
+    const [passwordInput, setPasswordInput] = useState("");
+    const handlePasswordChange =(evnt)=>{
+        setPasswordInput(evnt.target.value);
+    }
+    const togglePassword =()=>{
+      if(passwordType==="password")
+      {
+       setPasswordType("text")
+       return;
+      }
+      setPasswordType("password")
+    }
 
   return (
     <>
-      <section class="Breadcrub_sec">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-12">
+      <section className="Breadcrub_sec">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-12">
               <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
+                <ol className="breadcrumb">
 
-                  <li class="breadcrumb-item"><Link href="/">Home</Link></li>
+                  <li className="breadcrumb-item"><Link href="/">Home</Link></li>
 
-                  <li class="breadcrumb-item active" aria-current="page">Login</li>
+                  <li className="breadcrumb-item active" aria-current="page">Login</li>
                 </ol>
               </nav>
             </div>
@@ -59,39 +72,39 @@ function login() {
         </div>
       </section>
 
-      <section class="signin_register_sec">
-        <div class="container max-container">
-          <div class="row">
-            <div class="col-lg-12">
-              <div class="signin_card">
+      <section className="signin_register_sec">
+        <div className="container max-container">
+          <div className="row">
+            <div className="col-lg-12">
+              <div className="signin_card">
                 <p>Welcome back! 👋</p>
                 <h4>Sign in to your account</h4>
 
                 <form onSubmit={handleSubmit(submitForm)}>
-                  <div class="mb-3">
-                    <label for="email-l" class="form-label">Email address <span>*</span></label>
-                    <div class="input-group">
+                  <div className="mb-3">
+                    <label for="email-l" className="form-label">Email or Phone Number <span>*</span></label>
+                    <div className="input-group">
                       <img src="assets/images/email-f.svg" alt="email" />
-                      <input type="email" autoComplete='off' class="form-control" id="email-l" placeholder="" {...register('email')} required="" />
+                      <input type="email" autoComplete='off' className="form-control" id="email-l" placeholder="" {...register('email')} required="" />
                     </div>
                   </div>
 
-                  <div class="mb-3">
-                    <label for="password-l" class="form-label">Password <span>*</span></label>
-                    <div class="input-group">
+                  <div className="mb-3">
+                    <label for="password-l" className="form-label">Password <span>*</span></label>
+                    <div className="input-group">
                       <img src="assets/images/lock.svg" alt="email" />
-                      <input type="password" autoComplete='off' class="form-control" id="password-l" {...register('password')} placeholder="" required="" />
-                      <span toggle="#password-l" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                      <input type={passwordType} autoComplete='off' className="form-control" id="password-l" {...register('password')} placeholder="" required="" />
+                      <span onClick={togglePassword} type="button" toggle="#password-l" className={ passwordType==='password'? 'field-icon toggle-password fa fa-fw fa-eye' :'field-icon toggle-password fas fa-eye-slash'}></span>
                     </div>
                   </div>
 
-                  <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="remerber_me" />
-                    <label class="form-check-label" for="remerber_me">Remember me</label>
+                  <div className="mb-3 form-check">
+                    <input type="checkbox" className="form-check-input" id="remerber_me" />
+                    <label className="form-check-label" for="remerber_me">Remember me</label>
                   </div>
-                  <button type="submit" class="btn form_submit">SIGN IN</button>
+                  <button type="submit" className="btn form_submit">SIGN IN</button>
                 </form>
-                <Link href="forgot-password" class="forget_password">Forget your password?</Link>
+                <Link href="forgot-password" className="forget_password">Forget your password?</Link>
 
                 <div className='text-center pt-3'>
                   <span className='text-dark p-2 h6 '>New User?</span><span><Link href='/register' className='register_link p-2'>Register</Link></span>

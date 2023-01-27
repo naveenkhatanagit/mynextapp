@@ -38,6 +38,19 @@ function UpdatePasswordComponent(props) {
             toastMessage({ message, type: 'error' });
         })
     }
+    const [passwordType, setPasswordType] = useState("password");
+    const [passwordInput, setPasswordInput] = useState("");
+    const handlePasswordChange =(evnt)=>{
+        setPasswordInput(evnt.target.value);
+    }
+    const togglePassword =()=>{
+      if(passwordType==="password")
+      {
+       setPasswordType("text")
+       return;
+      }
+      setPasswordType("password")
+    }
 
   return (
     <>
@@ -53,8 +66,8 @@ function UpdatePasswordComponent(props) {
                     <label for="password-l" class="form-label">Password <span>*</span></label>
                     <div class="input-group">
                       <img src="assets/images/lock.svg" alt="email" />
-                      <input type="password" onChange={(e) => { setNewPassword(e.target.value) }} autoComplete='off' class="form-control" id="password-l" placeholder="" required="" />
-                      <span toggle="#password-l" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                      <input type={passwordType} onChange={(e) => { setNewPassword(e.target.value) }} autoComplete='off' class="form-control" id="password-l" placeholder="" required="" />
+                      <span onClick={togglePassword} type="button" toggle="#password-l" className={ passwordType==='password'? 'field-icon toggle-password fa fa-fw fa-eye' :'field-icon toggle-password fas fa-eye-slash'}></span>
                     </div>
                   </div>
 
@@ -63,7 +76,7 @@ function UpdatePasswordComponent(props) {
                     <div class="input-group">
                       <img src="assets/images/lock.svg" alt="email" />
                       <input type="password" onChange={(e) => { setConfirmPassword(e.target.value) }} autoComplete='off' class="form-control" id="password-l" placeholder="" required="" />
-                      <span toggle="#password-l" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                     
                     </div>
                   </div>
 

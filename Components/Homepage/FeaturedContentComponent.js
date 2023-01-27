@@ -1,6 +1,30 @@
 import React from 'react'
+import { getschoolList } from "../../Api/HomepageApi"
+import { useState, useEffect } from 'react'
+import SchoolComponent from './SchoolComponent';
 
 function FeaturedContentComponent() {
+
+    const [schoolList, setSchoolList] = useState([]);
+
+    useEffect(() => {
+
+        getschoolList().then((response) => {
+            let res = response.data;
+            if (res) {
+                setSchoolList(res.data);
+            }
+
+        }).catch((error) => {
+            toast.error("something went wrong", {
+                position: "top-right",
+                classNameName: "app_toast",
+                autoClose: 1000,
+            })
+        })
+
+    }, [])
+
     return (
         <section className="school-sec pt-0">
             {/* <!---------------------------------> */}
@@ -42,130 +66,7 @@ function FeaturedContentComponent() {
             </div>
             {/* <!---------------------------------> */}
 
-            <div className="container school_we_stock_cont">
-                <div className="row jcc">
-                    <h2 className="sec-title text-center mb-3 mb-sm-4">SCHOOL WE STOCK</h2>
-
-                    <div className="category_card_box mb-0 mb-sm-4">
-                        <form className="d-flex mb-0 mb-sm-4" role="search">
-                            <input className="form-control me-2" type="search" placeholder="Search by school" />
-                            <button className="btn drak-btn" type="submit"><i className="fas fa-search"></i></button>
-                        </form>
-                    </div>
-
-                    <div className="category_card_box_row">
-
-                        <div className="category_card_box">
-                            <div className="school-card text-center">
-                                <div className="img"><a href="#"><img src="assets/images/school1.png" className="w-100" alt="" /></a></div>
-                                <a href="#" className="text-dark text-decoration-none">
-                                    <h4>CARMAN PUBLIC SCHOOL</h4>
-                                </a>
-                                <a href="#">VIEW PRODUCTS</a>
-                            </div>
-                        </div>
-
-                        <div className="category_card_box">
-                            <div className="school-card text-center">
-                                <div className="img"><a href="#"><img src="assets/images/school2.png" className="w-100" alt="" /></a></div>
-                                <a href="#" className="text-dark text-decoration-none">
-                                    <h4>CARMAN PUBLIC SCHOOL</h4>
-                                </a>
-                                <a href="#">VIEW PRODUCTS</a>
-                            </div>
-                        </div>
-
-                        <div className="category_card_box">
-                            <div className="school-card text-center">
-                                <div className="img"><a href="#"><img src="assets/images/school3.png" className="w-100" alt="" /></a></div>
-                                <a href="#" className="text-dark text-decoration-none">
-                                    <h4>CARMAN PUBLIC SCHOOL</h4>
-                                </a>
-                                <a href="#">VIEW PRODUCTS</a>
-                            </div>
-                        </div>
-
-                        <div className="category_card_box">
-                            <div className="school-card text-center">
-                                <div className="img"><a href="#"><img src="assets/images/school4.png" className="w-100" alt="" /></a></div>
-                                <a href="#" className="text-dark text-decoration-none">
-                                    <h4>CARMAN PUBLIC SCHOOL</h4>
-                                </a>
-                                <a href="#">VIEW PRODUCTS</a>
-                            </div>
-                        </div>
-
-                        <div className="category_card_box">
-                            <div className="school-card text-center">
-                                <div className="img"><a href="#"><img src="assets/images/school5.png" className="w-100" alt="" /></a></div>
-                                <a href="#" className="text-dark text-decoration-none">
-                                    <h4>CARMAN PUBLIC SCHOOL</h4>
-                                </a>
-                                <a href="#">VIEW PRODUCTS</a>
-                            </div>
-                        </div>
-
-                        <div className="category_card_box">
-                            <div className="school-card text-center">
-                                <div className="img"><a href="#"><img src="assets/images/school6.png" className="w-100" alt="" /></a></div>
-                                <a href="#" className="text-dark text-decoration-none">
-                                    <h4>CARMAN PUBLIC SCHOOL</h4>
-                                </a>
-                                <a href="#">VIEW PRODUCTS</a>
-                            </div>
-                        </div>
-
-                        <div className="category_card_box">
-                            <div className="school-card text-center">
-                                <div className="img"><a href="#"><img src="assets/images/school7.png" className="w-100" alt="" /></a></div>
-                                <a href="#" className="text-dark text-decoration-none">
-                                    <h4>CARMAN PUBLIC SCHOOL</h4>
-                                </a>
-                                <a href="#">VIEW PRODUCTS</a>
-                            </div>
-                        </div>
-
-                        <div className="category_card_box">
-                            <div className="school-card text-center">
-                                <div className="img"><a href="#"><img src="assets/images/school8.png" className="w-100" alt="" /></a></div>
-                                <a href="#" className="text-dark text-decoration-none">
-                                    <h4>CARMAN PUBLIC SCHOOL</h4>
-                                </a>
-                                <a href="#">VIEW PRODUCTS</a>
-                            </div>
-                        </div>
-
-                        <div className="category_card_box">
-                            <div className="school-card text-center">
-                                <div className="img"><a href="#"><img src="assets/images/school9.png" className="w-100" alt="" /></a></div>
-                                <a href="#" className="text-dark text-decoration-none">
-                                    <h4>CARMAN PUBLIC SCHOOL</h4>
-                                </a>
-                                <a href="#">VIEW PRODUCTS</a>
-                            </div>
-                        </div>
-
-                        <div className="category_card_box">
-                            <div className="school-card text-center">
-                                <div className="img"><a href="#"><img src="assets/images/school10.png" className="w-100" alt="" /></a></div>
-                                <a href="#" className="text-dark text-decoration-none">
-                                    <h4>CARMAN PUBLIC SCHOOL</h4>
-                                </a>
-                                <a href="#">VIEW PRODUCTS</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="row mt-5">
-                        <div className="col-lg-12 text-center">
-                            <a href="#">
-                                <button className="btn white-btn mt-4">VIEW ALL</button>
-                            </a>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
+            <SchoolComponent schoolList={schoolList} />
         </section>
     )
 }

@@ -3,9 +3,11 @@ import toastMessage from '../../../utils/toast';
 import axios from "axios";
 import { useState, useEffect } from "react";
 import UpdatePasswordComponent from './UpdatePasswordComponent';
+import backendApiUrl from "../../../Api/GlobalApi"
 
 const TIME_DOWN = 60;
 var timeOut;
+const backendApiUrl = "https://api.novusuniforms.com";
 
 function ForgetOtpPasswordComponent(props) {
     const [timer, setTimer] = useState(TIME_DOWN);
@@ -25,11 +27,11 @@ function ForgetOtpPasswordComponent(props) {
 
         axios({
             method: "post",
-            url: "https://awesmatic.vistamatrix.in/api/customer/forgot_password_otpverify",
+            url: backendApiUrl+"/api/customer/forgot_password_otpverify",
             data: formdata,
         }).then((response) => {
             let res = response.data;
-            if (response.status === 200 && res.status) {
+            if (res.status === true) {
                 setOtpUserId(res.user_id);
                 setToken(res.token);
                 setOtpForm(false)
@@ -38,7 +40,10 @@ function ForgetOtpPasswordComponent(props) {
                     message: res.message,
                 })
             } else {
-                toastMessage({ message: res.message, type: 'error' });
+                if(JSON.parse(res.message).otp){
+                    toastMessage({ message: JSON.parse(res.message).otp[0], type: 'error' });
+                }
+                
             }
         }).catch(({ response: { data: { message } } = {} }) => {
             toastMessage({ message, type: 'error' });
@@ -50,7 +55,7 @@ function ForgetOtpPasswordComponent(props) {
         formdata.append("user_id", userId);
         axios({
             method: "post",
-            url: "https://awesmatic.vistamatrix.in/api/customer/resendotp",
+            url: backendApiUrl + "/api/customer/resendotp",
             data: formdata,
         }).then((response) => {
             var res = response.data;

@@ -71,6 +71,19 @@ function register() {
     dispatch(registerUser(data))
   }
 
+  const [passwordType, setPasswordType] = useState("password");
+    const [passwordInput, setPasswordInput] = useState("");
+    const handlePasswordChange =(evnt)=>{
+        setPasswordInput(evnt.target.value);
+    }
+    const togglePassword =()=>{
+      if(passwordType==="password")
+      {
+       setPasswordType("text")
+       return;
+      }
+      setPasswordType("password")
+    }
 
 
   return (
@@ -129,7 +142,8 @@ function register() {
                     <label for="password-p" class="form-label">Password <span>*</span></label>
                     <div class="input-group">
                       <img src="assets/images/lock.svg" alt="email" />
-                      <input type="password" autoComplete='off' class="form-control" {...register('password')} id="password-p" placeholder="" required="" />
+                      <input type={passwordType} autoComplete='off' class="form-control" {...register('password')} id="password-p" placeholder="" required="" />
+                      <span onClick={togglePassword} type="button" toggle="#password-l" className={ passwordType==='password'? 'field-icon toggle-password fa fa-fw fa-eye' :'field-icon toggle-password fas fa-eye-slash'}></span>
                     </div>
                   </div>
 

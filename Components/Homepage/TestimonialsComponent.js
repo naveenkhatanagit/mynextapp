@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { useEffect } from "react"
 import { gettestimonialList } from "../../Api/HomepageApi"
 import { toast } from "react-toastify"
+import Image from 'next/image'
 
 
 function TestimonialsComponent() {
@@ -75,7 +76,7 @@ function TestimonialsComponent() {
                     <div className="testimonials_wrap" key={index}>
                         <div className="test-card">
                             <div className="person-img">
-                                <img src="{item.image}" alt="" />
+                                <img src={item.image} alt="" />
                             </div>
                             <div className="author_name">
                                 <h5>{item.name}</h5>
