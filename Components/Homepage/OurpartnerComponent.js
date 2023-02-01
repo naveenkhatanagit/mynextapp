@@ -1,30 +1,11 @@
 import React from 'react'
-import { getOurPartnerList } from "../../Api/HomepageApi"
-import { useState, useEffect } from 'react'
 import Slider from "react-slick";
-import Image from 'next/image'
 
-const OurpartnerComponent = () => {
 
-  const [ourPartnerList, setOurPartnerList] = useState([]);
+const OurpartnerComponent = (props) => {
 
-  useEffect(() => {
-
-    getOurPartnerList().then((response) => {
-      let res = response.data;
-      if (res) {
-        setOurPartnerList(res.data);
-      }
-
-    }).catch((error) => {
-      toast.error("something went wrong", {
-        position: "top-right",
-        classNameName: "app_toast",
-        autoClose: 1000,
-      })
-    })
-
-  }, [])
+  
+  const ourPartnerList = props.ourParterList.data;
 
   const ourpartnerSlider = {
     centerMode: true,

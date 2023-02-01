@@ -2,36 +2,13 @@ import React from 'react'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import { useState } from 'react'
-import { useEffect } from "react"
-import { gettestimonialList } from "../../Api/HomepageApi"
-import { toast } from "react-toastify"
-import Image from 'next/image'
 
 
-function TestimonialsComponent() {
-    const [ testimonialList, settestimonialList ] = useState([]);
-  
-    useEffect(() => {
+
+function TestimonialsComponent(props) {
+
+    const testimonialList = props.testimonialList.data;
     
-        gettestimonialList().then((response) => {
-            let res = response.data;
-            if (res) {
-                settestimonialList(res.data);
-            }
-            
-        }).catch((error) => {
-            toast.error("something went wrong", {
-                position: "top-right",
-                classNameName: "app_toast",
-                autoClose: 1000,
-              })
-        })
-    
-    }, [])
-
-   
-
     const testomonialSlider = {
         slidesToShow: 3,
         slidesToScroll: 1,

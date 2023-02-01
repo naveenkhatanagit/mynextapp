@@ -8,7 +8,7 @@ import OurproductComponent from './OurproductComponent';
 import SchoolUniformsComponent from './SchoolUniformsComponent';
 import TestimonialsComponent from './TestimonialsComponent';
 
-function HomepageComponent() {
+function HomepageComponent(props) {
 
 
   return (
@@ -18,7 +18,7 @@ function HomepageComponent() {
       <MainbannersliderComponent/>
 
       {/* <!-- =-=-=-=-=-=-= fEATURED CONTENT  section =-=-=-=-=-=-=== --> */}
-      <FeaturedContentComponent/>
+      <FeaturedContentComponent schoolList={props.schoolList}/>
       
 
       {/* <!-- =-=-=-=-=-= Our Product =-=-=-=-=-=-=- --> */}
@@ -32,17 +32,17 @@ function HomepageComponent() {
 
 
       {/* <!-- =-=-=-=-=-= Testimonial sec =-=-=-=-=-=-=- --> */}
-      <TestimonialsComponent />
+      <TestimonialsComponent testimonialList={props.testimonialList} />
 
       {/* <!-- =-=-=-=-=-=-=-== FAQ sec =-=-=-=-=-=-== --> */}
-      <FaqComponent/>
+      <FaqComponent faqList={props.faqList}/>
 
 
 
       {/* <!----------------------------------------------------> */}
 
       {/* <!-- =-=-=-=-=-= School Uniform =-=-=-=-=-=-=- --> */}
-      <OurpartnerComponent/>
+      <OurpartnerComponent ourParterList={props.ourParterList}/>
 
 
       

@@ -68,6 +68,15 @@ function FooterComponent() {
                     </div>
                 </div>
             </footer>
+            <section class="copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                            <p>Copyright © 2023, <a href="#">Novus India</a> . All Rights Reserved.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </>
     )
 }

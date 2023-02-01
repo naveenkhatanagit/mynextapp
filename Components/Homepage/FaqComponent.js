@@ -1,30 +1,11 @@
 import React from 'react'
-import { getFaqList } from "../../Api/HomepageApi"
-import { useState,useEffect } from 'react'
+import { useState } from 'react'
 
-const FaqComponent = () => {
+const FaqComponent = (props) => {
 
-  const [ faqList, setFaqList ] = useState([]);
+  const faqList = props.faqList.data;
   
-    useEffect(() => {
-    
-      getFaqList().then((response) => {
-            let res = response.data;
-            if (res) {
-                setFaqList(res.data);
-            }
-            
-        }).catch((error) => {
-            toast.error("something went wrong", {
-                position: "top-right",
-                classNameName: "app_toast",
-                autoClose: 1000,
-              })
-        })
-    
-    }, [])
-
-
+  
   return (
     <section className="faq-sec ">
       <div className="container">

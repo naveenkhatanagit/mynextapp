@@ -3,27 +3,11 @@ import { getschoolList } from "../../Api/HomepageApi"
 import { useState, useEffect } from 'react'
 import SchoolComponent from './SchoolComponent';
 
-function FeaturedContentComponent() {
 
-    const [schoolList, setSchoolList] = useState([]);
 
-    useEffect(() => {
 
-        getschoolList().then((response) => {
-            let res = response.data;
-            if (res) {
-                setSchoolList(res.data);
-            }
-
-        }).catch((error) => {
-            toast.error("something went wrong", {
-                position: "top-right",
-                classNameName: "app_toast",
-                autoClose: 1000,
-            })
-        })
-
-    }, [])
+function FeaturedContentComponent(props) {
+    const schoolList = props.schoolList.data;
 
     return (
         <section className="school-sec pt-0">
@@ -70,5 +54,7 @@ function FeaturedContentComponent() {
         </section>
     )
 }
+
+
 
 export default FeaturedContentComponent

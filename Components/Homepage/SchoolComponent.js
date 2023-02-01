@@ -1,8 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
+import SingleSchoolComponent from './SingleSchoolComponent'
 
 function SchoolComponent(props) {
-
+ 
     
     return (
         <>
@@ -20,15 +21,7 @@ function SchoolComponent(props) {
                     <div className="category_card_box_row">
                         {
                             props.schoolList.map((item, key) => (
-                                <div className="category_card_box" key={key}>
-                                    <div className="school-card text-center">
-                                        <div className="img"><a href="#"><img src={item.logo_img} className="w-100" alt="" /></a></div>
-                                        <a href="#" className="text-dark text-decoration-none">
-                                            <h4>{item.name}</h4>
-                                        </a>
-                                        <a href="#">VIEW PRODUCTS</a>
-                                    </div>
-                                </div>
+                                <SingleSchoolComponent school_item={item} school_item_key={key} />
 
                             ))
 
@@ -37,7 +30,7 @@ function SchoolComponent(props) {
 
                     <div className="row mt-5">
                         <div className="col-lg-12 text-center">
-                            <Link href="schools-we-stock">
+                            <Link href="/schools-we-stock">
                                 <button className="btn btn-light mt-4">VIEW ALL</button>
                             </Link>
                         </div>
