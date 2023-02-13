@@ -63,6 +63,21 @@ function OurproductComponent() {
                       </div>
                       <div className="col-lg-3 col-md-6">
                         <div className="product-card mb-3">
+                          <img src="assets/images/product1.png" className="w-100" alt="" />
+                          <div className="product-detail">
+                            <div className="rating">
+                              <div className="star-img"><i className="fas fa-star"></i> <i className="fas fa-star"></i> <i
+                                className="fas fa-star"></i> <i className="fas fa-star"></i> <i className="fas fa-star"></i></div>
+                              <p className="mb-2">120(Reviews)</p>
+                            </div>
+                            <p className="product-name mb-2">Winter Unisex Blue Full Sleeves House T-Shirt</p>
+                            <p className="price mb-2"><b>Rs. 435/-</b> <del>Rs. 700/-</del></p>
+                            <a href="#" className="buy-btn"><b>SHOP NOW</b></a>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-lg-3 col-md-6">
+                        <div className="product-card mb-3">
                           <img src="assets/images/product2.png" className="w-100" alt="" />
                           <div className="product-detail">
                             <div className="rating">

@@ -1,16 +1,24 @@
 import React from 'react'
 import SingleSchoolComponent from '@/Components/Homepage/SingleSchoolComponent';
 import axios from "axios"
-
+import Link from 'next/link';
 
 const backendApiUrl = "https://api.novusuniforms.com";
 
 function schoolsWEstock(props) {
 
-    const schoolAllList = props.schoolList.data.data;
+    const schoolAllList = props.schoolList.data;
 
-
-
+    function getQueryParams(url) {
+        const paramArr = url.slice(url.indexOf('?') + 1).split('&');
+        const params = {};
+        paramArr.map(param => {
+            const [key, val] = param.split('=');
+            params[key] = decodeURIComponent(val);
+        })
+        return params;
+    }
+    
     return (
         <>
             <section class="Breadcrub_sec">
@@ -19,7 +27,7 @@ function schoolsWEstock(props) {
                         <div class="col-lg-12">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                    <li class="breadcrumb-item"><Link href="/">Home</Link></li>
                                     <li class="breadcrumb-item active" aria-current="page">Schools we stock</li>
                                 </ol>
                             </nav>
@@ -33,22 +41,16 @@ function schoolsWEstock(props) {
                     <div class="row jcc">
                         <div class="category_card_box mb-0 mb-sm-4">
                             <form class="d-flex mb-0 mb-sm-4" role="search">
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected>City</option>
-                                    <option value="1">Patiala</option>
-                                    <option value="2">Chd</option>
-                                    <option value="3">Zirakpur</option>
-                                </select>
-                                <input class="form-control" type="search" placeholder="Search by school" />
+                                <input class="form-control" name='search_school_query' autoComplete='off' defaultValue={props.search_school_query} type="search" placeholder="Search by school" />
                                 <button class="btn drak-btn" type="submit"><i class="fas fa-search"></i></button>
                             </form>
                         </div>
 
                         <div class="category_card_box_row">
                             {
-                                schoolAllList.map((item, key) => (
+                                schoolAllList.data.map((item, key) => (
                                     <SingleSchoolComponent school_item={item} school_item_key={key} />
-                                    
+
                                 ))
 
                             }
@@ -56,28 +58,23 @@ function schoolsWEstock(props) {
                         </div>
 
 
-                        {/* <!-------pagination---------------------> */}
+
+                        {schoolAllList.data.length !=  0 ?
                         <div class="PageNation_card">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination">
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Previous">
-                                            <span aria-hidden="true"><img src="images/left-nav.png" alt="" /> Prev</span>
-                                        </a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link active" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Next">
-                                            <span aria-hidden="true">Next <img src="images/right-nav.png" alt="" /></span>
-                                        </a>
-                                    </li>
+        
+                                    {
+                                        schoolAllList.links.map((item, key) => (
+                                            <li class="page-item"><Link style={{ pointerEvents: item.url == null? 'none' : 'auto' }}  class={item.active == true ? 'page-link active':'page-link'} href={item.url != null?"/schools-we-stock?search_school_query="+props.search_school_query+"&page="+getQueryParams(item.url).page:''} dangerouslySetInnerHTML={{__html: item.label}}></Link></li>
+                                        ))
+
+                                    }
+    
                                 </ul>
                             </nav>
-                        </div>
-                        {/* <!-------pagination---------------------> */}
+                        </div>:
+                        'No Result Found'}
 
                     </div>
                 </div>
@@ -89,12 +86,14 @@ function schoolsWEstock(props) {
 export default schoolsWEstock
 
 export async function getServerSideProps(context) {
+     
+    const { page,search_school_query} = context.query;
 
-    let school = await axios.get(backendApiUrl + "/api/customer/school_list_all")
+    let school = await axios.get(backendApiUrl + "/api/customer/school_list_all?search_school_query="+search_school_query+"&page="+page)
     const getSchoolList = school.data;
-  
+
     return {
-      props: { schoolList: getSchoolList}, // will be passed to the page component as props
+        props: { schoolList: getSchoolList,search_school_query:search_school_query }, // will be passed to the page component as props
     }
-  
-  }
+
+}

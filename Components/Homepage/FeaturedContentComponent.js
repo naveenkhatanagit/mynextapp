@@ -1,5 +1,5 @@
 import React from 'react'
-import { getschoolList } from "../../Api/HomepageApi"
+import { getschoolList } from "../../Api/Api"
 import { useState, useEffect } from 'react'
 import SchoolComponent from './SchoolComponent';
 

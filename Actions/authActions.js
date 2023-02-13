@@ -3,7 +3,7 @@ import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify"
 
-const backendURL = 'https://awesmatic.vistamatrix.in/api'
+const backendURL = 'https://api.novusuniforms.com/api'
 export const userLogin = createAsyncThunk(
   'auth/login',
   async ({ email, password }, { rejectWithValue }) => {
@@ -22,12 +22,14 @@ export const userLogin = createAsyncThunk(
       // store user's token in local storage
 
         sessionStorage.setItem('userToken', data.access_token)
+        window.location.href = "/";
         
         toast.success("Login Successfully", {
           position: "top-right",
           classNameName: "app_toast",
           autoClose: 1000,
         })
+        
         
         
       return data
@@ -58,7 +60,7 @@ export const registerUser = createAsyncThunk(
       )
 
        sessionStorage.setItem('new_user_id', data.user_id)
-      //  window.location.href = "/login";
+       window.location.href = "/login";
       return data
     } catch (error) {
     // return custom error message from backend if present

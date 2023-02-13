@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from "axios"
 import ProductComponent from '@/Components/School/ProductComponent';
+import Link from 'next/link'
 
 const backendApiUrl = "https://api.novusuniforms.com";
 
@@ -44,7 +45,7 @@ function SchoolPage(props) {
           <div class="shop_by_class_wrap">
           {
               schoolDetail.package_types.map((item, key) => (
-                  <a href="#"><img src={item.image} alt=""/></a>
+                  <Link href={'product-bulk-add-to-cart/'+schoolDetail.id+"/"+item.id}><img src={item.image} alt=""/></Link>
 
               ))
 
@@ -91,25 +92,25 @@ function SchoolPage(props) {
       <div class="row icon_box_wrap_row">
         <div class="col-lg-3">
           <div class="icon_box_wrap">
-            <img src="images/p-icon2.png" alt="Easy Exchange"/>
+            <img src={"/"+"assets/images/p-icon2.png"} alt="Easy Exchange"/>
             <h4>Easy Exchange</h4>
           </div>
         </div>
         <div class="col-lg-3">
           <div class="icon_box_wrap">
-            <img src="images/p-icon1.png" alt="Cod"/>
+            <img src={"/"+"assets/images/p-icon1.png"} alt="Cod"/>
             <h4>Easy Exchange</h4>
           </div>
         </div>
         <div class="col-lg-3">
           <div class="icon_box_wrap">
-            <img src="images/p-icon3.png" alt="Guaranteed Authenticity"/>
+            <img src={"/"+"assets/images/p-icon3.png"} alt="Guaranteed Authenticity"/>
             <h4>Easy Exchange</h4>
           </div>
         </div>
         <div class="col-lg-3">
           <div class="icon_box_wrap">
-            <img src="images/p-icon4.png" alt="Handpicked"/>
+            <img src={"/"+"assets/images/p-icon4.png"} alt="Handpicked"/>
             <h4>Easy Exchange</h4>
           </div>
         </div>

@@ -1,12 +1,69 @@
 import React from 'react'
 import axios from "axios"
+import Router from 'next/router';
+import Link from 'next/link'
+import {AddToCartItem} from '../../Api/Api'
+import { toast } from "react-toastify"
+import { useSelector } from 'react-redux'
 
 const backendApiUrl = "https://api.novusuniforms.com";
 
 
 function ProductPage(props) {
+    const { userInfo } = useSelector((state) => state.auth)
     const productDetail = props.productDetail.data;
+    const reccommendProductList = props.reccommendProductList.data;
+    function onvariationChange(event) {
+        const variation_id = event.target.value;
+        const product_id = productDetail.id;
 
+        axios.get(backendApiUrl + "/api/customer/get_next_variation_product_id/" + product_id + '/' + variation_id).then((response) => {
+            const get_next_variation_product_id = response.data.data.product_id;
+
+            const setproductpath = '/product/' + get_next_variation_product_id;
+
+            Router.push(setproductpath);
+
+        });
+
+
+    }
+    
+
+    const AddToCartHandler = () => {
+        
+        var customerId = null;
+        
+        var formdata = new FormData();
+   
+        if(userInfo !== null){
+             customerId = userInfo.id;
+             formdata.append('customer_id', customerId);
+        }else{
+            const session_id = sessionStorage.getItem('cartsession');
+            formdata.append('session_id', session_id);
+        }
+
+        formdata.append('product_id', productDetail.id);
+        formdata.append('quantity', 1);
+        
+        AddToCartItem(formdata).then((response) => {
+            toast.success("Item added to cart successfully", {
+                position: "top-right",
+                classNameName: "app_toast",
+                autoClose: 1000,
+            })
+            Router.push('/cart');
+
+        }).catch((error) => {
+
+            toast.error(error.response.data.error, {
+                position: "top-right",
+                classNameName: "app_toast",
+                autoClose: 1000,
+            })
+        })
+    }
 
 
     return (
@@ -74,16 +131,20 @@ function ProductPage(props) {
                             <div class="product_detail_info">
                                 <h4 class="product_title">{productDetail.product_name} </h4>
 
-                                <div class="rating">
+                                {/* <div class="rating">
                                     <div class="star-img"><i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i>
                                         <i class="fas fa-star"></i> <i class="fas fa-star"></i>
                                     </div>
                                     <p class="mb-0"> 250 Reviews</p>
-                                </div>
+                                </div> */}
+
+
 
                                 <div class="product_price">
                                     <p class="regular_price">Rs {productDetail.selling_price}</p>
-                                    <p class=""><del>Rs {productDetail.mrp}</del></p>
+                                    {productDetail.selling_price < productDetail.mrp ?
+                                        <p class=""><del>Rs {productDetail.mrp}</del></p> : ""
+                                    }
                                 </div>
 
                                 <div class="product_attributes">
@@ -93,14 +154,55 @@ function ProductPage(props) {
                                             <div class="size_attribute d-flex">
                                                 <div class="input-group">
                                                     <label><span>*</span>{item.name}</label>
-                                                    <select class="form-select" aria-label="Default select example">
-                                                        {
-                                                            item.variation_value.map((variation_value, index) => (
-                                                                <option value={variation_value.id}>{variation_value.value}</option>
+                                                    <select class="form-select" aria-label="Default select example" onChange={onvariationChange}>
+                                                        {item.name == 'Color' ?
 
-                                                            ))
+
+
+                                                            item.variation_value.map((variation_value, index) => (
+
+                                                                <option value={variation_value.id} selected={variation_value.value === productDetail.variation_combination.color ? true : false} >{variation_value.value}</option>
+
+                                                            )) : ""
 
                                                         }
+
+                                                        {item.name == 'Size' ?
+
+
+
+                                                            item.variation_value.map((variation_value, index) => (
+
+                                                                <option value={variation_value.id} selected={variation_value.value === productDetail.variation_combination.size ? true : false} >{variation_value.value}</option>
+
+                                                            )) : ""
+
+                                                        }
+
+                                                        {item.name == 'Pack' ?
+
+
+
+                                                            item.variation_value.map((variation_value, index) => (
+
+                                                                <option value={variation_value.id} selected={variation_value.value === productDetail.variation_combination.pack ? true : false} >{variation_value.value}</option>
+
+                                                            )) : ""
+
+                                                        }
+
+                                                        {item.name == 'Style' ?
+
+
+
+                                                            item.variation_value.map((variation_value, index) => (
+
+                                                                <option value={variation_value.id} selected={variation_value.value === productDetail.variation_combination.style ? true : false} >{variation_value.value}</option>
+
+                                                            )) : ""
+
+                                                        }
+
                                                     </select>
                                                 </div>
 
@@ -115,13 +217,17 @@ function ProductPage(props) {
 
                                 </div>
 
+                                <div><a href='#' className='text-warning'>Size Chart</a></div>
 
 
-                                <div class="add_to_cart_btn">
-                                    <button class="btn cart_btn">ADD TO CART</button>
-                                    <button class="btn buy_now">BUY IT NOW</button>
-                                </div>
+                                {productDetail.quantity == 0 ? <div class="add_to_cart_btn text-danger"><h3>Out Of Stock</h3></div> :
+                                    <div class="add_to_cart_btn">
+                                        <button onClick={AddToCartHandler} class="btn cart_btn">ADD TO CART</button>
+                                        <button class="btn buy_now">BUY IT NOW</button>
+                                    </div>
+                                }
                             </div>
+
                         </div>
                     </div>
 
@@ -132,50 +238,23 @@ function ProductPage(props) {
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link active" id="11-tab" data-bs-toggle="tab" data-bs-target="#11" type="button"
-                                        role="tab" aria-controls="11-tab-pane" aria-selected="true">Description 1</button>
+                                        role="tab" aria-controls="11-tab-pane" aria-selected="true">Description</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="12-tab" data-bs-toggle="tab" data-bs-target="#12-tab-pane" type="button"
-                                        role="tab" aria-controls="12-tab-pane" aria-selected="false">Description 2</button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="13-tab" data-bs-toggle="tab" data-bs-target="#13-tab-pane" type="button"
-                                        role="tab" aria-controls="13-tab-pane" aria-selected="false">Item Measurements</button>
+                                        role="tab" aria-controls="12-tab-pane" aria-selected="false">Additional Information</button>
                                 </li>
                             </ul>
 
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="11" role="tabpanel" aria-labelledby="11-tab" tabindex="0">
                                     <div>
-                                        This premium T-shirt is as close to perfect as can be. It's optimized for all types of print and will
-                                        quickly become your favorite
-
-                                        <p>T-shirt. Soft, comfortable, and durable, this is a definite must-own.</p>
-                                        <ul>
-                                            <li>Brand: Novus India</li>
-                                            <li>100% cotton | Fabric Weight: s</li>
-                                            <li>240 GSM</li>
-                                            <li>Wide range of sizes from S-3XL</li>
-                                            <li>Fairly produced, certified, and double bio-washed.</li>
-                                            <li>Double-stitched reinforced seams at shoulder, sleeve, collar, and waist</li>
-                                        </ul>
-
-                                        <ul>
-                                            <li>Pique Fabric With Super feel Finish</li>
-                                            <li>Optimized for beautiful brilliance across all printing methods including Logo or Name Embroidery
-                                            </li>
-                                            <li>Made in India</li>
-                                        </ul>
+                                        {productDetail.details.description}
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="12-tab-pane" role="tabpanel" aria-labelledby="12-tab" tabindex="0">
                                     <div>
-                                        Please add text here
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="13-tab-pane" role="tabpanel" aria-labelledby="13-tab" tabindex="0">
-                                    <div>
-                                        Please add text here
+                                        {productDetail.details.additional_information}
                                     </div>
                                 </div>
                             </div>
@@ -191,20 +270,25 @@ function ProductPage(props) {
                         </div>
 
                         <div class="row pt-2 pt-md-5">
-
-                            <div class="col-lg-3 col-md-3 col-sm-6 col-6">
-                                <div class="product-card">
-                                    <a href="#"><img src="images/s-dress1.png" class="w-100" alt="" /></a>
-                                    <div class="product-detail text-center">
-                                        <a href="#">
-                                            <p class="product-name mb-0">Class Name Here</p>
-                                        </a>
-                                        <p class="price mb-2"><b>Rs. 500/-</b> <del>Rs. 699/-</del></p>
+                            {
+                                reccommendProductList.map((item, key) => (
+                                    <div class="col-lg-3 col-md-3 col-sm-6 col-6">
+                                        <div class="product-card">
+                                            <Link href={'/product/' + item.id}><img src={item.main_image.image} class="w-100" alt="" /></Link>
+                                            <div class="product-detail text-center">
+                                                <a href="#">
+                                                    <p class="product-name mb-0">{item.product_name}</p>
+                                                </a>
+                                                <p class="price mb-2"><b>Rs. {item.selling_price}/-</b> {productDetail.selling_price < productDetail.mrp ?
+                                                    <del>Rs {productDetail.mrp}</del> : ""
+                                                }</p>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
 
+                                ))
 
+                            }
 
 
 
@@ -228,8 +312,10 @@ export async function getServerSideProps(context) {
 
     const productDetail = productDetails.data;
 
+    let getreccommendProductList = await axios.get(backendApiUrl + "/api/customer/get_recommended_product/list/" + product_id);
+    const reccommendProductList = getreccommendProductList.data;
     return {
-        props: { productDetail: productDetail }, // will be passed to the page component as props
+        props: { productDetail: productDetail, reccommendProductList: reccommendProductList }, // will be passed to the page component as props
     }
 
 }
