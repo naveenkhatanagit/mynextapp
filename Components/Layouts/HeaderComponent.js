@@ -170,7 +170,7 @@ function onproductsearchitemHandle(){
                                     </ul>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link" href="/schools-we-stock"> Schools </Link>
+                                    <Link className="nav-link" href="/schools-we-stock?search_school_query="> Schools </Link>
                                 </li>
                                 <li className="nav-item">
                                     <a className="nav-link" href="subscription.html">Bulk Orders</a>
@@ -255,7 +255,7 @@ function onproductsearchitemHandle(){
                                 </ul>
                             </li>
                             <li className="nav-item dropdown">
-                                <a className="nav-link" href="all-products.html"> Schools </a>
+                                <Link className="nav-link" href="/schools-we-stock?search_school_query="> Schools </Link>
                                 <span className="dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false"><img
                                     src={"/" + "assets/images/menu-icon.png"} /></span>
                                 <ul className="dropdown-menu">
