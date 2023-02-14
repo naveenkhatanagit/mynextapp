@@ -1867,6 +1867,10 @@ p.total_amount {
     aspect-ratio: 1/1;
 }
 
+.product-card img {
+    aspect-ratio: 1/1;
+}
+
 .single_product_details .container {
     padding: 45px;
 }
@@ -2487,3 +2491,80 @@ section.bundle_tab_sec h2.sec-title {
     padding-right: 10px;
 }
 
+.my_wishlist_dash .box_wish {
+    overflow:hidden;
+    padding:15px 20px;
+    column-gap: 20px;
+    border:1px solid lightgrey;
+    border-radius:10px;
+  }
+  .my_wishlist_dash .action_btns a{
+    font-size: 18px;
+    text-decoration: underline;
+    color: rgb(255 137 0);
+  }
+  
+  .wish_image_thumb{
+      max-width:130px;
+  }
+  .wish_image_thumb img{
+      aspect-ratio:1/1;
+  }
+  .wish_price b{
+    font-size: 22px;
+    color: #373737;
+  }
+  .my_wishlist_dash h4 {
+      color: #373737;
+  }
+  @media screen and (max-width:576px) {
+    .action_btns{
+      justify-content:space-around
+    }  
+    .wish_image_thumb{
+      max-width:180px;
+      margin: auto;
+    }
+  }
+
+  .wishlist_icon img{
+    aspect-ratio: 1/1;
+    fill:black
+  }
+.wishlist_icon.wished img{
+
+fill:red
+}
+.wishlist_icon{
+position: relative;
+margin-top: -2rem;
+width: 45px;
+overflow: hidden;
+background: #f4f4f4;
+border-radius: 50%;
+display: inline-flex;
+padding: 5px;
+float: right;
+cursor: pointer;
+box-shadow: 2px 0px 5px 2px #c5c5c5;
+}
+
+@media screen and (max-width:768px) {
+.wishlist_icon{
+margin-top: 0rem;
+} 
+}
+  
+h4.heading_right_side_bar{
+    color: black;
+  }
+.mycoupon_dash .box_code {
+  overflow:hidden;
+  padding:15px 20px;
+  column-gap: 20px;
+  border:1px solid lightgrey;
+  border-radius:10px;
+}
+.mycoupon_dash h4{
+    color: #373737;
+}

@@ -6,6 +6,8 @@ import AddNewAddressComponent from '@/Components/Account/AddNewAddressComponent'
 import { toast } from "react-toastify"
 import EditAddressComponent from '@/Components/Account/EditAddressComponent';
 import AccountSidebarComponent from '@/Components/Account/AccountSidebarComponent';
+import UsernameComponent from '@/Components/Account/UsernameComponent';
+import AccountBreadcrumbComponent from '@/Components/Account/AccountBreadcrumbComponent';
 
 function manageAddress() {
     const [userAddressList, setuserAddressList] = useState([]);
@@ -106,21 +108,7 @@ function manageAddress() {
 
     return (
         <>
-            <section class="Breadcrub_sec">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                    <li class="breadcrumb-item" aria-current="page">My Account</li>
-                                    <li class="breadcrumb-item active" aria-current="page">Profile</li>
-                                </ol>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </section>
+           <AccountBreadcrumbComponent pagename="Manage Address"/>
 
             <section class="user_profile">
                 <div class="container">
@@ -129,10 +117,7 @@ function manageAddress() {
 
                         <div class="col-lg-3 col-md-3 col-sm-3 col-12 d-none d-lg-block">
                             <div class="Profile_sidebar">
-                                <div class="User_avtar_wrap d-flex">
-                                    <div><img src="assets/images/user-profile.png" alt="" /></div>
-                                    <div>Hello, <br /> <span class="username">Ramesh Kumar</span></div>
-                                </div>
+                               <UsernameComponent/>
 
                                 <AccountSidebarComponent/>
                             </div>

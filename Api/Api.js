@@ -214,3 +214,42 @@ export async function LogOutApi(userToken) {
     });
     return result;
 }
+
+export async function WislistList(userToken) {
+    let result = await axios({
+        method: "get",
+        url: backendApiUrl + `/api/customer/get_wishlist`,
+        headers: {
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + userToken
+        }
+    });
+    return result;
+}
+
+export async function RemoveWishlistitemapi(userToken,item_id) {
+    let result = await axios({
+        method: "get",
+        url: backendApiUrl + `/api/customer/customer_remove_wishlist/`+item_id,
+        headers: {
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + userToken
+        }
+    });
+    return result;
+}
+
+export async function AddToWislistItem(formdata,userToken) {
+    let result = await axios({
+        method: "post",
+        url: backendApiUrl + `/api/customer/customer_add_wishlist`,
+        headers: {
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + userToken
+        },
+        data: formdata
+    });
+    return result;
+}
+
+

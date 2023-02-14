@@ -22,7 +22,7 @@ function HomepageComponent(props) {
       
 
       {/* <!-- =-=-=-=-=-= Our Product =-=-=-=-=-=-=- --> */}
-      <OurproductComponent/>
+      <OurproductComponent homepagecategoryList={props.homepagecategoryList}/>
 
       {/* <!-- =-=-=-=-=-= School Uniform =-=-=-=-=-=-=- --> */}
       <SchoolUniformsComponent/>

@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { useGetUserDetailsQuery } from '../app/services/auth/authService'
 import AccountSidebarComponent from '@/Components/Account/AccountSidebarComponent'
+import UsernameComponent from '@/Components/Account/UsernameComponent'
+import AccountBreadcrumbComponent from '@/Components/Account/AccountBreadcrumbComponent'
 
 function account() {
 
@@ -18,35 +20,14 @@ function account() {
 
     return (
         <>
-            <section className="Breadcrub_sec">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-12">
-                            <nav aria-label="breadcrumb">
-                                <ol className="breadcrumb">
-                                    <li className="breadcrumb-item"><a href="index.html">Home</a></li>
-                                    <li className="breadcrumb-item" aria-current="page">My Account</li>
-                                    <li className="breadcrumb-item active" aria-current="page">Profile</li>
-                                </ol>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </section>
+           <AccountBreadcrumbComponent pagename="My Account"/>
 
             <section className="user_profile">
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-3 col-md-3 col-sm-3 col-12 d-none d-lg-block">
                             <div className="Profile_sidebar">
-                                <div className="User_avtar_wrap d-flex">
-                                    <div><img src="assets/images/user-profile.png" alt="" /></div>
-                                    <div>Hello, <br /> <span className="username"> {isFetching
-                                        ? 'Fetching...'
-                                        : userInfo !== null
-                                            ? userInfo.name.slice(0, 15)
-                                            : ''}</span></div>
-                                </div>
+                                <UsernameComponent/>
 
 
                                 <AccountSidebarComponent />

@@ -4,6 +4,8 @@ import { toast } from "react-toastify"
 import { OrderList } from '../Api/Api'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import UsernameComponent from '@/Components/Account/UsernameComponent'
+import AccountBreadcrumbComponent from '@/Components/Account/AccountBreadcrumbComponent'
 
 function MyOrders() {
 
@@ -29,15 +31,13 @@ function MyOrders() {
 
     return (
         <>
+        <AccountBreadcrumbComponent pagename="My Orders"/>
             <section class="user_profile">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-3 col-md-3 col-sm-3 col-12 d-none d-lg-block">
                             <div class="Profile_sidebar">
-                                <div class="User_avtar_wrap d-flex">
-                                    <div><img src="assets/images/user-profile.png" alt="" /></div>
-                                    <div>Hello, <br /> <span class="username">Ramesh Kumar</span></div>
-                                </div>
+                               <UsernameComponent/>
 
                                 <AccountSidebarComponent />
                             </div>

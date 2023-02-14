@@ -36,13 +36,13 @@ function AccountSidebarComponent(props) {
                         <Link href="/manage-address"><img src="assets/images/My-wishlist.svg" alt="wishlist" />Manage Address</Link>
                     </li>
                     <li>
-                        <a href="my-wishlist.html"><img src="assets/images/My-wishlist.svg" alt="wishlist" />My wishlist</a>
+                        <Link href="/wishlist"><img src="assets/images/My-wishlist.svg" alt="wishlist" />My wishlist</Link>
                     </li>
                     <li className="coupons">
                         <Link href="/account"><img src="assets/images/Account-Settings.svg" alt="Coupons" />Personal information</Link>
                     </li>
                     <li className="coupons">
-                        <a href="coupon.html"><img src="assets/images/Coupons.svg" alt="Coupons" />Coupons</a>
+                        <Link href="/coupons"><img src="assets/images/Coupons.svg" alt="Coupons" />Coupons</Link>
                     </li>
                     <li className="user_logout">
                         <a type='button' onClick={LogOutHandle}><img src="assets/images/logout.svg" alt="order" />Logout</a>

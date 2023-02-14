@@ -193,7 +193,7 @@ function onproductsearchitemHandle(){
                 <section>
                     <nav className="navbar navbar-expand-lg mobile-bottom-header-bar">
                         <div className="container">
-                            <a className="navbar-brand site-logo" href="index.html"><img src={"/" + "assets/images/logo.png"} /></a>
+                            <Link className="navbar-brand site-logo" href="/"><img src={"/" + "assets/images/logo.png"} /></Link>
                             <div className="d-flex menu-desktop">
                                 <form className="d-flex search-bar">
                                     <input className="form-control me-2" type="search" placeholder="Serach Products..." />
@@ -201,8 +201,13 @@ function onproductsearchitemHandle(){
                                 </form>
                                 <div className="d-flex justify-content-around">
                                     <div className="header-login">
-                                        <a href="login.html" className="d-flex">
-                                            <img src={"/" + "assets/images/User.png"} /> Sign In </a>
+                                    {isFetching
+                                            ? 'Fetching...'
+                                            : userInfo !== null
+                                                ? <Link href="/account" className="d-flex">
+                                                    <img src={"/" + "assets/images/User.png"} alt="user" /> {userInfo.name} </Link>
+                                                : <Link href="/login" className="d-flex">
+                                                    <img src={"/" + "assets/images/User.png"} alt="user" /> Sign In </Link>}
                                     </div>
                                     <div className="header-cart">
                                         <img src={"/" + "assets/images/Shopping-bag.png"} />

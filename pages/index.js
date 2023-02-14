@@ -20,7 +20,7 @@ export default function Home(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <HomepageComponent schoolList={props.schoolList} ourParterList={props.ourParterList} faqList={props.faqList} testimonialList={props.testomonialList} />
+      <HomepageComponent homepagecategoryList={props.homepagecategoryList} schoolList={props.schoolList} ourParterList={props.ourParterList} faqList={props.faqList} testimonialList={props.testomonialList} />
 
 
     </>
@@ -45,9 +45,12 @@ export async function getStaticProps(context) {
   let ourSchool = await axios.get(backendApiUrl + "/api/customer/school_list")
   const getschoolList = ourSchool.data;
 
+  let homepagecategory = await axios.get(backendApiUrl + "/api/customer/category_with_products")
+  const homepagecategoryList = homepagecategory.data;
+
 
   return {
-    props: { testomonialList: gettestimonialList, faqList: getFaqList, ourParterList: getOurPartnerList, schoolList: getschoolList }, // will be passed to the page component as props
+    props: { testomonialList: gettestimonialList, faqList: getFaqList, ourParterList: getOurPartnerList, schoolList: getschoolList,homepagecategoryList,homepagecategoryList }, // will be passed to the page component as props
     revalidate: 60,
   }
 

@@ -2,16 +2,40 @@ import React from 'react'
 import axios from "axios"
 import Router from 'next/router';
 import Link from 'next/link'
-import {AddToCartItem} from '../../Api/Api'
+import { AddToCartItem,AddToWislistItem,WislistList,RemoveWishlistitemapi } from '../../Api/Api'
 import { toast } from "react-toastify"
 import { useSelector } from 'react-redux'
+import { useState } from 'react'
+
 
 const backendApiUrl = "https://api.novusuniforms.com";
 
 
 function ProductPage(props) {
-    const { userInfo } = useSelector((state) => state.auth)
+    const [inWislist, setinWislist] = useState(false);
+    const { userInfo, userToken } = useSelector((state) => state.auth)
+
+    
     const productDetail = props.productDetail.data;
+
+    if(userInfo != null){
+        WislistList(userToken).then((response) => {
+            let res = response.data.data;
+
+            res.forEach(myFunction);
+
+            function myFunction(item, index) {
+                if(item.product_id == productDetail.id){
+                    setinWislist(true)
+                }
+            }
+            
+
+        }).catch((error) => {
+
+        })
+    }
+
     const reccommendProductList = props.reccommendProductList.data;
     function onvariationChange(event) {
         const variation_id = event.target.value;
@@ -28,29 +52,69 @@ function ProductPage(props) {
 
 
     }
-    
+
+    const AddToWishlistHandler = () => {
+        
+        if (userInfo !== null) {
+            
+            var formdata = new FormData();
+            formdata.append('product_id', productDetail.id);
+
+            AddToWislistItem(formdata, userToken).then((response) => {
+                setinWislist(true);
+                toast.success("Item added to Wishlist", {
+                    position: "bottom-center",
+                    autoClose: 1000,
+                })
+
+
+            }).catch((error) => {
+
+            })
+        } else {
+            Router.push('/login');
+        }
+
+
+
+    }
+
+    const onRemoveHandleWishlist = () => {
+        RemoveWishlistitemapi(userToken,productDetail.id).then((response) => {
+            setinWislist(false);
+            toast.success("Wishlist removed successfully!", {
+                position: "bottom-center",
+                autoClose: 1000,
+            })
+
+        }).catch((error) => {
+            toast.error("something went wrong", {
+                position: "top-right",
+                autoClose: 1000,
+            })
+        })
+    }
 
     const AddToCartHandler = () => {
-        
+
         var customerId = null;
-        
+
         var formdata = new FormData();
-   
-        if(userInfo !== null){
-             customerId = userInfo.id;
-             formdata.append('customer_id', customerId);
-        }else{
+
+        if (userInfo !== null) {
+            customerId = userInfo.id;
+            formdata.append('customer_id', customerId);
+        } else {
             const session_id = sessionStorage.getItem('cartsession');
             formdata.append('session_id', session_id);
         }
 
         formdata.append('product_id', productDetail.id);
         formdata.append('quantity', 1);
-        
+
         AddToCartItem(formdata).then((response) => {
             toast.success("Item added to cart successfully", {
                 position: "top-right",
-                classNameName: "app_toast",
                 autoClose: 1000,
             })
             Router.push('/cart');
@@ -59,7 +123,6 @@ function ProductPage(props) {
 
             toast.error(error.response.data.error, {
                 position: "top-right",
-                classNameName: "app_toast",
                 autoClose: 1000,
             })
         })
@@ -75,7 +138,7 @@ function ProductPage(props) {
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                    <li class="breadcrumb-item" aria-current="page">Boys Uniforms</li>
+                                    <li class="breadcrumb-item" aria-current="page">Product</li>
                                     <li class="breadcrumb-item active" aria-current="page">{productDetail.product_name}</li>
                                 </ol>
                             </nav>
@@ -129,6 +192,7 @@ function ProductPage(props) {
                         </div>
                         <div class="col-lg-5">
                             <div class="product_detail_info">
+                                <span class="wishlist_icon ">{inWislist == false?<img onClick={AddToWishlistHandler} class="w-100" src={'/' + 'assets/images/wishlistheart.svg'} />:<img class="w-100" onClick={onRemoveHandleWishlist} src={'/' + 'assets/images/wishlistheartred.svg'} />}</span>
                                 <h4 class="product_title">{productDetail.product_name} </h4>
 
                                 {/* <div class="rating">
