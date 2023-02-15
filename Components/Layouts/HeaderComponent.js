@@ -52,7 +52,7 @@ function HeaderComponent() {
     
 
 
-    const handleCityChange = async (e) => {
+    const handleProductSearchChange = async (e) => {
         
         if(e.target.value != ''){
             setdisplaySearchList('d-block');
@@ -91,7 +91,7 @@ function onproductsearchitemHandle(){
                             <div className="col-lg-7">
                                 <div className="header-search-bar">
                                     <form action='/products' className="d-flex" role="search">
-                                        <input className="form-control form-search me-2" type="text" autoComplete='off' onChange={handleCityChange}
+                                        <input className="form-control form-search me-2" type="text" autoComplete='off' onChange={handleProductSearchChange}
                                             defaultValue={searchQuery} name='search_query' placeholder="Search" />
 
 

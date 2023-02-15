@@ -35,7 +35,7 @@ function coupons(props) {
                                             <div class="box_code d-block d-sm-flex mb-3">
                                                 <div class="coupon_text">
                                                     <h4 class="m-0">{item.name} <b>{item.discount}{item.discount == 'Fixed'?'RS':'%'} Discount</b></h4>
-                                                    <h4 class="m-0">PROMOCODE: <b>{item.code}</b></h4>
+                                                    <h4 class="m-0">PROMOCODE: <b><span class='text-orange'>{item.code}</span></b></h4>
                                                 </div>
                                             </div>
 
