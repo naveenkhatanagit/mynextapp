@@ -7,16 +7,40 @@ import { useGetUserDetailsQuery } from '../app/services/auth/authService'
 import AccountSidebarComponent from '@/Components/Account/AccountSidebarComponent'
 import UsernameComponent from '@/Components/Account/UsernameComponent'
 import AccountBreadcrumbComponent from '@/Components/Account/AccountBreadcrumbComponent'
+import { UpdateCustomerProfileApi } from '../Api/Api'
 
 function account() {
 
-    const { userInfo } = useSelector((state) => state.auth)
+    const { userInfo,userToken } = useSelector((state) => state.auth)
 
 
     // automatically authenticate user if token is found
     const { data, isFetching } = useGetUserDetailsQuery('userDetails', {
         // pollingInterval: 900000, // 15mins
     })
+
+    
+
+    const UpdateCustomerProfile = async (event) => {
+        event.preventDefault()
+        var name = event.target.name.value;
+
+        var formdata = new FormData();
+
+        formdata.append('name', name);
+
+        UpdateCustomerProfileApi(userToken,formdata).then((response) => {
+        
+            toast.success('Profile Updated Successfully', {
+                position: "top-right",
+                autoClose: 1000,
+            })
+
+        }).catch((error) => {
+
+        })
+
+    }
 
     return (
         <>
@@ -35,11 +59,11 @@ function account() {
                         </div>
                         <div className="col-lg-9 col-md-12 col-sm-12 col-12">
                             <div className="user_info_rightbar">
-                                <form className="Personal_info_form">
+                                <form className="Personal_info_form" onSubmit={UpdateCustomerProfile}>
                                     <div className="mb-3">
                                         <label for="" className="form-label">Personal Information*</label>
                                         <div className="input-group">
-                                            <input type="text" className="form-control" id="" placeholder="Full Name" value={isFetching
+                                            <input type="text" name='name' className="form-control" id="" placeholder="Full Name" defaultValue={isFetching
                                                 ? 'Fetching...'
                                                 : userInfo !== null
                                                     ? userInfo.name

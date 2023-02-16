@@ -1,7 +1,7 @@
 import AccountSidebarComponent from '@/Components/Account/AccountSidebarComponent'
 import React from 'react'
 import { toast } from "react-toastify"
-import { OrderList } from '../Api/Api'
+import { OrderList,OrderCancelmapi } from '../Api/Api'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import UsernameComponent from '@/Components/Account/UsernameComponent'
@@ -27,7 +27,32 @@ function MyOrders() {
         })
     }, [])
 
- 
+    const pluck = (arr, key) => arr.map(i => i[key]);
+
+    const onCancelOrderHandle = (index, item) => {
+
+        const userToken = sessionStorage.getItem('userToken');
+        var formdata = new FormData();
+        formdata.append('order_id', item.id);
+
+        OrderCancelmapi(userToken,formdata).then((response) => {
+
+            toast.success("Order Canceled successfully!", {
+                position: "top-right",
+                className: "app_toast",
+                autoClose: 1000,
+            })
+
+            window.location.reload(false)
+
+        }).catch((error) => {
+            toast.error("something went wrong", {
+                position: "top-right",
+                className: "app_toast",
+                autoClose: 1000,
+            })
+        })
+    }
 
     return (
         <>
@@ -46,6 +71,7 @@ function MyOrders() {
                             <div class="user_info_rightbar my-order-right-sidebar">
                                 {
                                     userOrderList.map((item, index) => (
+                                        <>
                                         <div class="my_order_list d-flex">
                                             <div class="">
                                                 <p class="p_items">Purchasd Items: <span class='text-dark'>{item.order_items.length}</span></p>
@@ -58,10 +84,10 @@ function MyOrders() {
                                                                 <img class="thumbnail thumbsquare" src={order_item.product_image} alt="" />
                                                                 <div class="ps-3 w-100">
                                                                     <h4>{order_item.product_title}</h4>
-
-                                                                    <div class="d-flex btn_group">
-                                                                        <Link href={'product/'+order_item.product_id} class="orange_btn btn"><img src="assets/images/refresh.svg" alt="" /><span> Buy it again</span></Link>
-                                                                    </div>
+                                                                    {item.invoice == null ?'': <div class="d-flex btn_group">
+                                                                        <Link href={'product/'+order_item.product_id} class="orange_btn btn"><span> Buy it again</span></Link>
+                                                                    </div>}
+                                                                   
                                                                 </div>
 
                                                             </div>
@@ -82,9 +108,26 @@ function MyOrders() {
                                                 <p class="ship_to">Ship to <a href="#">{item.shipping_order_address.full_name}</a></p>
                                                 <p class="ship_to">Mobile Number <a href="#">{item.shipping_order_address.mobile_number}</a></p>
                                                 <p class="ship_to">{item.shipping_order_address.address_line_1},{item.shipping_order_address.town_or_city},{item.shipping_order_address.pincode},{item.shipping_order_address.state}</p>
-                                                <p class="invoice"><a href="#">Invoice</a></p>
+                                                {item.invoice == null?'':<p class="invoice"><a target='_blank' href={item.invoice.invoice}>Invoice</a></p>}
+                                                {item.invoice != null || item.status == 'Cancelled'?'':<p class="invoice"><a class="text-danger" type='button' onClick={() => onCancelOrderHandle(index, item)}>Cancel Order</a></p>}
+                                                
                                             </div>
                                         </div>
+                                            <div class='card p-2 tracking_card border-0 mb-3'>
+                                            {item.status == 'Cancelled'?
+                                                <p class='text-danger fw-bold text-center'>Order Cancelled</p>
+                                            :<div class="progress-track">
+                                            <ul id="progressbar">
+                                                <li class={pluck(item.order_logs, 'title').includes("Placed")?'step0 active':'step0'} id="step1">Ordered</li>
+                                                <li class={pluck(item.order_logs, 'title').includes("Out For Delivery")?'step0 active text-center':'step0 text-center'} id="step2">sss</li>
+                                                <li class={pluck(item.order_logs, 'title').includes("Shipped")?'step0 active text-center':'step0 text-center'} id="step2">Shipped</li>
+                                                <li class={pluck(item.order_logs, 'title').includes("Out For Delivery")?'step0 active text-end':'step0 text-end'} id="step3">On the way</li>
+                                                <li class={pluck(item.order_logs, 'title').includes("Delivered")?'step0 active  text-end':'step0  text-end'}id="step4">Delivered</li>
+                                            </ul>
+                                            </div>
+                                        }
+                                                </div>
+</>
                                     ))
 
                                 }

@@ -1575,12 +1575,16 @@ p.total_amount {
 .my_order_list.d-flex {
     background-color: #fff;
     padding: 50px;
-    margin-bottom: 25px;
+    padding-bottom: 15px;
     justify-content: space-between;
     box-shadow: 0px 1px 6px #0000001f;
-    border-radius: 4px;
+    border-radius:4px 4px 0px 0px;
 }
-
+.tracking_card{
+    box-shadow: 0px 1px 6px #0000001f;
+    border-radius:0px 0px 4px 4px !important;
+    margin-top:-5px;
+}
 
 .my_oder_info.d-flex h4 {
     font-size: 18px;
@@ -2567,4 +2571,110 @@ h4.heading_right_side_bar{
 }
 .mycoupon_dash h4{
     color: #373737;
+}
+#progressbar {
+    margin-bottom: 3vh;
+    overflow: hidden;
+    color: rgb(252, 103, 49);
+    padding-left: 0px;
+    margin-top: 3vh
+}
+
+#progressbar li {
+    list-style-type: none;
+    font-size: x-small;
+    width: 20%;
+    float: left;
+    position: relative;
+    font-weight: 400;
+    color: rgb(160, 159, 159);
+}
+
+#progressbar #step1:before {
+    content: "";
+    color: rgb(252, 103, 49);
+    width: 5px;
+    height: 5px;
+    margin-left: 0px !important;
+    /* padding-left: 11px !important */
+}
+
+#progressbar #step2:before {
+    content: "";
+    color: #fff;
+    width: 5px;
+    height: 5px;
+    margin-left: 32%;
+}
+
+#progressbar #step3:before {
+    content: "";
+    color: #fff;
+    width: 5px;
+    height: 5px;
+    margin-right: 32% ; 
+    /* padding-right: 11px !important */
+}
+
+#progressbar #step4:before {
+    content: "";
+    color: #fff;
+    width: 5px;
+    height: 5px;
+    margin-right: 0px !important;
+    /* padding-right: 11px !important */
+}
+
+#progressbar li:before {
+    line-height: 29px;
+    display: block;
+    font-size: 12px;
+    background: #ddd;
+    border-radius: 50%;
+    margin: auto;
+    z-index: -1;
+    margin-bottom: 1vh;
+}
+
+#progressbar li:after {
+    content: '';
+    height: 2px;
+    background: #ddd;
+    position: absolute;
+    left: 0%;
+    right: 0%;
+    margin-bottom: 2vh;
+    top: 1px;
+    z-index: 1;
+}
+.progress-track{
+    padding: 0 8%;
+}
+#progressbar li:nth-child(2):after {
+    margin-right: auto;
+}
+
+#progressbar li:nth-child(1):after {
+    margin: auto;
+}
+#progressbar li:nth-child(3):after {
+    margin-right: auto;
+}
+#progressbar li:nth-child(4):after {
+    float: left;
+    width: 68%;
+}
+
+#progressbar li:nth-child(5):after {
+    margin-left: auto;
+    width: 132%;
+}
+
+#progressbar  li.active{
+    color: black;
+}
+
+#progressbar li.active:before,
+#progressbar li.active:after {
+    background: rgb(252, 103, 49);
 }

@@ -202,6 +202,14 @@ export async function ProductSearchApi(search_query) {
     return result;
 }
 
+export async function SchoolSearchApiautocomplete(search_query) {
+    let result = await axios({
+        method: "get",
+        url: backendApiUrl + "/api/customer/get_search_schools?search_query=" + search_query,
+    });
+    return result;
+}
+
 
 export async function LogOutApi(userToken) {
     let result = await axios({
@@ -214,6 +222,19 @@ export async function LogOutApi(userToken) {
     });
     return result;
 }
+export async function UpdateCustomerProfileApi(userToken,formdata) {
+    let result = await axios({
+        method: "post",
+        url: backendApiUrl + `/api/customer/customer_update_profile`,
+        headers: {
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + userToken
+        },
+        data: formdata
+    });
+    return result;
+}
+
 
 export async function WislistList(userToken) {
     let result = await axios({
@@ -235,6 +256,19 @@ export async function RemoveWishlistitemapi(userToken,item_id) {
             'Accept': 'application/json',
             'Authorization': 'Bearer ' + userToken
         }
+    });
+    return result;
+}
+
+export async function OrderCancelmapi(userToken,formdata) {
+    let result = await axios({
+        method: "Post",
+        url: backendApiUrl + `/api/customer/cancel_order`,
+        headers: {
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + userToken
+        },
+        data: formdata
     });
     return result;
 }

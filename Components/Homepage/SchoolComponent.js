@@ -11,6 +11,25 @@ function SchoolComponent(props) {
     const [autocompleteErr, setAutocompleteErr] = useState("");
     const [displaySearchList, setdisplaySearchList] = useState("d-none");
 
+    useEffect(() => {
+
+        const concernedElement = document.querySelector(".school-autocomplete");
+
+        document.addEventListener("mousedown", (event) => {
+            
+          if (concernedElement.contains(event.target)) {
+            if(displaySearchList != ''){
+                setdisplaySearchList('d-block');
+            }
+           
+          } else {
+            setdisplaySearchList('d-none');
+          }
+        });
+
+
+    }, [autocompleteProducts])
+
     const handleSearchSchoolChange = async (e) => {
 
         if (e.target.value != '') {
@@ -19,37 +38,40 @@ function SchoolComponent(props) {
             setdisplaySearchList('d-none');
         }
 
-
+        
         setsearchQuery(e.target.value);
 
 
         const res = await SchoolSearchApiautocomplete(searchQuery);
         !autocompleteProducts.includes(e.target.value) &&
             res.data &&
-            setautocompleteProducts(res.data.data.map((item) => new Array({ 'school_name': item.school_name })));
+            setautocompleteProducts(res.data.data.map((item) => new Array({ 'school_name': item.name,'school_logo': item.logo_img,'school_id':item.id })));
         res.error ? setAutocompleteErr(res.error) : setAutocompleteErr("");
     };
 
-
+    function onproductsearchitemHandle(){
+        setdisplaySearchList('d-none');
+    }
+    
     return (
         <>
             <div className="container school_we_stock_cont">
                 <div className="row jcc">
                     <h2 className="sec-title text-center mb-3 mb-sm-4">SCHOOL WE STOCK</h2>
 
-                    <div className="category_card_box mb-0 mb-sm-4">
-                        <form action='/schools-we-stock' className="d-flex mb-0 mb-sm-4" role="search">
-                            <input className="form-control me-2" required autoComplete='off' onChange={handleSearchSchoolChange} name='search_school_query' type="search" placeholder="Search by school" />
+                    <div className="category_card_box school-autocomplete">
+                        <form action='/schools-we-stock'  className="d-flex mb-0 mb-sm-4" role="search">
+                            <input className="form-control me-2" defaultValue={searchQuery} required autoComplete='off' onChange={handleSearchSchoolChange} name='search_school_query' type="search" placeholder="Search by school" />
                             <button className="btn drak-btn" type="submit"><i className="fas fa-search"></i></button>
                         </form>
                         {autocompleteProducts.length !== 0 ?
-                            <div class={"datalist-results pt-2 " + displaySearchList}>
+                            <div class={"datalist-results-school pt-2 " + displaySearchList}>
                                 {autocompleteProducts.map((item, i) => (
 
-                                    <Link className='text-dark text-decoration-none' href={'/' + 'product'}>
+                                    <Link className='text-dark text-decoration-none' href={'/'+'school/'+item[0].school_id} onClick={onproductsearchitemHandle}>
                                         <div class="d-flex px-3" key={i}>
                                             <div>
-                                                <img src="" alt="" class="img-fluid" />
+                                                <img src={item[0].school_logo} alt="" class="img-fluid" />
                                             </div>
                                             <p class="w-100">{item[0].school_name}<br /></p>
                                         </div>
@@ -62,7 +84,7 @@ function SchoolComponent(props) {
                             ''}
                     </div>
 
-                    <div className="category_card_box_row">
+                    <div className="category_card_box_row  mt-0 mt-sm-4">
                         {
                             props.schoolList.map((item, key) => (
                                 <SingleSchoolComponent school_item={item} school_item_key={key} />
