@@ -118,8 +118,8 @@ function MyOrders() {
                                                 <p class='text-danger fw-bold text-center'>Order Cancelled</p>
                                             :<div class="progress-track">
                                             <ul id="progressbar">
-                                                <li class={pluck(item.order_logs, 'title').includes("Placed")?'step0 active':'step0'} id="step1">Ordered</li>
-                                                <li class={pluck(item.order_logs, 'title').includes("Out For Delivery")?'step0 active text-center':'step0 text-center'} id="step2">sss</li>
+                                                <li class={pluck(item.order_logs, 'title').includes("Placed")?'step0 active':'step0'} id="step1">Placed</li>
+                                                <li class={pluck(item.order_logs, 'title').includes("Order Confirmed")?'step0 active text-center':'step0 text-center'} id="step2">Confirmed</li>
                                                 <li class={pluck(item.order_logs, 'title').includes("Shipped")?'step0 active text-center':'step0 text-center'} id="step2">Shipped</li>
                                                 <li class={pluck(item.order_logs, 'title').includes("Out For Delivery")?'step0 active text-end':'step0 text-end'} id="step3">On the way</li>
                                                 <li class={pluck(item.order_logs, 'title').includes("Delivered")?'step0 active  text-end':'step0  text-end'}id="step4">Delivered</li>
